@@ -1,0 +1,4 @@
+"""
+Define main scraping operation 
+
+"""
