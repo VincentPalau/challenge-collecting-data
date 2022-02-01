@@ -4,25 +4,37 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
-
 class FetchUrls(Thread):
-    def __init__(self, page, set_urls):
+    '''
+    Collect URLs of ads to scrape
+
+    Attributes :
+    ------------
+    page : URL of the page
+    set_urls : the set where the links from page are stored (we use set to avoid duplicates)
+    '''
+    def __init__(self, page: str, set_urls: set[str]) -> None:
         Thread.__init__(self)
         self.page = page
         self.set_urls = set_urls
 
-    def run(self, driver):
+    def run(self, driver: webdriver) -> None:
+        '''
+        Scrape page to fetch url of each ad
+        '''
         driver.get(self.page)
         soup = BeautifulSoup(driver.page_source, "lxml")
         tags_adverts = soup.find_all("a", class_ = "card__title-link")
         for advert in tags_adverts:
             self.set_urls.add(advert.get("href"))
 
-def fetch_urls(number_of_adverts):
+def fetch_urls(number_of_adverts: int) -> set[str]:
+    '''
+    Returns a set of URLs for a required number of ad
+    '''
     set_urls = set()
     options = Options()
     options.headless = True
-    # path = "C:\\Users\\vpala\Documents"
     driver = webdriver.Firefox(options=options)
     i = 1
     while len(set_urls) < number_of_adverts:
@@ -33,17 +45,28 @@ def fetch_urls(number_of_adverts):
     driver.close()
     return set_urls
 
-
-
 class ScrapeImmoweb(Thread):
+    '''
+    Scrape a single ad.
+
+    Attributes :
+    ------------
+    keywords_list : a list of the information to scrape from the ad
+    url : the URL of the ad
+    dictionary : the dictionary to store all the information
+
+    '''
     keywords_list = ["Neighbourhood or locality", "Price", "Bedrooms", "Living area", "Kitchen type", "Furnished", "Terrace surface", "Garden surface", "Surface of the plot", "Number of frontages", "Swimming pool", "Building condition"]
-    def __init__(self, url, dictionary):
+    def __init__(self, url: str, dictionary: dict) -> None:
         Thread.__init__(self)
         self.url = url
         self.dictionary = dictionary
         self.dictionary["url"] = url
 
-    def scraping_ads(self):
+    def scraping_ads(self) -> None:
+        '''
+        Scrape information from the ad according to the list of keywords and actually adding the type of property from the URL
+        '''
         r = requests.get(self.url)
         soup = BeautifulSoup(r.content,"lxml")
         raw_tables = soup.find_all("table", class_= "classified-table")
@@ -79,9 +102,8 @@ class ScrapeImmoweb(Thread):
         self.dictionary["type"] = self.url.split('/')[5]
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # only use for testing
     set_urls = fetch_urls(3)
-
     for url in set_urls:
         properties ={}
         ad = ScrapeImmoweb(url, properties)
