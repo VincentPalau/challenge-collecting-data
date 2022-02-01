@@ -23,7 +23,7 @@ def fetch_urls(number_of_adverts):
     options = Options()
     options.headless = True
     # path = "C:\\Users\\vpala\Documents"
-    # driver = webdriver.Firefox(path, options=options)
+    driver = webdriver.Firefox(options=options)
     i = 1
     while len(set_urls) < number_of_adverts:
         page = f"https://www.immoweb.be/en/search/house-and-apartment/for-sale?countries=BE&page={i}&orderBy=relevance"
@@ -76,8 +76,7 @@ class ScrapeImmoweb(Thread):
                                      self.dictionary[clean_head] = None
                             else:
                                 self.dictionary[" ".join(row.th.string.split())] = " ".join(data.string.split())
-        # url_extract = self.url.split('/')[5]
-        # print(url_extract)
+        self.dictionary["type"] = self.url.split('/')[5]
 
 
 if __name__ == "__main__":
