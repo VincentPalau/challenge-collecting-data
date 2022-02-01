@@ -1,7 +1,8 @@
-from threading import Thread
+from threading import Thread, RLock
+from bs4 import BeautifulSoup
+import requests
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-from bs4 import BeautifulSoup
 
 
 class FetchUrls(Thread):
@@ -31,7 +32,55 @@ def fetch_urls(number_of_adverts):
     driver.close()
     return set_urls
 
+
+
+class ScrapeImmoweb(Thread):
+    keywords_list = ["Neighbourhood or locality", "Price", "Bedrooms", "Living area", "Kitchen type", "Furnished", "Terrace surface", "Garden surface", "Surface of the plot", "Number of frontages", "Swimming pool", "Building condition"]
+    def __init__(self, url, dictionary):
+        Thread.__init__(self)
+        self.url = url
+        self.dictionary = dictionary
+        self.dictionary["url"] = url
+
+    def scraping_ads(self):
+        r = requests.get(self.url)
+        soup = BeautifulSoup(r.content,"lxml")
+        raw_tables = soup.find_all("table", class_= "classified-table")
+        for table in raw_tables:
+            for row in table.tbody.find_all("tr"):
+                head = row.th
+                if not(head is None or head.string is None):
+                    clean_head = " ".join(row.th.string.split())
+                    if clean_head in self.keywords_list:
+                        data = row.td
+                        if data is None:
+                            self.dictionary[" ".join(row.th.string.split())] = None
+                        else:
+                            data_string = data.string
+                            if data_string is None:
+                                if clean_head == "Living area":
+                                    for span in data("span"):
+                                        span.extract()
+                                    clean_data = " ".join(data.contents).split()[0]
+                                    self.dictionary[clean_head] = clean_data
+                                elif clean_head == 'Price':
+                                    self.dictionary[clean_head] = data.span.contents[0].split()[-1]
+                                elif len(data.span.contents) > 0 :
+                                    list_data = data.span.contents[0].split()
+                                    if len(list_data) > 0:
+                                        self.dictionary[clean_head] = list_data[0]
+                                    else:
+                                        self.dictionary[clean_head] = None
+                                else:
+                                     self.dictionary[clean_head] = None
+                            else:
+                                self.dictionary[" ".join(row.th.string.split())] = " ".join(data.string.split())
+
 if __name__ == "__main__":
-    set_urls = fetch_urls(1e4)
-    print(len(set_urls))
-    print(set_urls)
+    set_urls = fetch_urls(3)
+
+    for url in set_urls:
+        properties ={}
+        ad = ScrapeImmoweb(url, properties)
+        ad.scraping_ads()
+        print(properties)
