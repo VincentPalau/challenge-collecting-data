@@ -34,6 +34,8 @@ def saveToCSV(property: dict, path: str) -> str:
         """
         The function that will save the property paramater to path paramater as a csv file. It will call the cleanDirectory().
         And then it will write the paramater to csv file as a row.
+        :param property: The dictionary that has a property attributes what user wants to save.
+        :param path: The string that user wants to save 
         """
         report_message = ""
         cols = ["Locality", "Price", "Bedrooms", "Living area", "Kitchen type", "Furnished", "Terrace surface", "Garden surface", "Surface of the plot", "Number of frontages", "Swimming pool", "Building condition","Type of property"]
