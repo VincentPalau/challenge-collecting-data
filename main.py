@@ -66,12 +66,4 @@ def cleanDictionary(property: dict) -> dict:
     return clean_dict
 
 
-p1 = {'Building condition': "Good", 'Number of frontages': '3', 'Living area': '101', 'Kitchen type': 'Installed', 'Bedrooms': '2', 'Furnished': 'No', 'Price': '296,000'}
-p2 = {'Building condition': 'To renovate', 'Number of frontages': '2', 'Living area': '176', 'Kitchen type': 'Semi equipped', 'Bedrooms': '3', 'Furnished': 'No', 'Surface of the plot': None, 'Garden surface': None, 'Price': '369,000'}
-p3 = {'Living area': '87', 'Kitchen type': 'Installed', 'Bedrooms': '2', 'Furnished': 'No', 'Price': '157,500', 'Type of property': 'apartment', 'Locality': 'morlanwelz'}
-p4 = {'Building condition': 'To be done up', 'Number of frontages': '4', 'Living area': '220', 'Kitchen type': 'Installed', 'Bedrooms': '4', 'Furnished': 'No', 'Surface of the plot': None, 'Price': '950,000', 'Type of property': 'villa', 'Neighbourhood or locality': 'uccle'}
-p5 = {'Building condition': 'Good', 'Number of frontages': '2', 'Living area': '130', 'Kitchen type': 'Semi equipped', 'Bedrooms': '3', 'Furnished': 'No', 'Terrace surface': None, 'Swimming pool': 'No', 'Price': '339,500', 'Type of property': 'apartment', 'Neighbourhood or locality': 'bruxelles'}
-p6 = {'Building condition': 'To be done up', 'Number of frontages': '4', 'Living area': '220', 'Kitchen type': 'Installed', 'Bedrooms': '4', 'Furnished': 'No', 'Surface of the plot': '2030', 'Price': '950,000', 'Type of property': 'villa', 'Locality': 'linkebeek'}
-p7 = {'Building condition': 'As new', 'Number of frontages': '3', 'Living area': '355', 'Kitchen type': 'Hyper equipped', 'Bedrooms': '3', 'Furnished': 'No', 'Surface of the plot': '500', 'Garden surface': '80', 'Terrace surface': '20', 'Swimming pool': 'No', 'Price': '390,000', 'Type of property': 'house', 'Locality': 'lubbeek'}
-#createCSV("./utils/properties.csv")
-saveToCSV(p7,"./utils/properties.csv")
+
