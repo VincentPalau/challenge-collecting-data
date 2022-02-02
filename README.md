@@ -1,25 +1,41 @@
-# challenge-collecting-data
-Python library to scrape real estate data
-
 #### Description
 
-#### Install
+In order to assist the company "ImmoEliza" for making price predictions on real estate sales in Belgium, we have created this webscraping project using BeautifulSoup, Request, Selenium, Thread and RLock libraries.  
+Immoweb is Belgium's leading real estate website, which is the website we used for web scraping in this project. In the end, all the extracted information has been stored in a dataset with the format of csv.file. In this dataset, we created the following columns:  
 
+- Locality  
+- Type of property (House, Apartment, Bungalow, Chalet, Mansion, ...)  
+- Price  
+- Number of rooms  
+- Area  
+- Fully equipped kitchen (Yes/No)  
+- Furnished (Yes/No)  
+- Terrace (Yes/No) If yes: Area  
+- Garden (Yes/No)  If yes: Area  
+- Surface of the plot of land  
+- Number of facades  
+- Swimming pool (Yes/No)  
+- State of the building (New, to be renovated, ...)    
 
-#### Usage
+#### Installation  
 
+WebScraping using Firefox driver in Python3.9.  
 
-<img src="https://camo.githubusercontent.com/e1738c1e29f862d362ddc2e73332335b2b2593126810d388a26648ebe94b3e34/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f313158713476566d6246434868532f67697068792e676966" >
+#### Usage  
 
-#### Contributors
+This project enables company Immo Eliza to collect real-time data from immoweb which provides them with a large pool of insights about the real estate market in Belgium. Immo Eliza could understand the current market values and they could optimize their prices in different ways. For instance, Immo Eliza can rely on a competitive pricing model such that they could decrease the price of similar properties to attract more customers or increase the price to reflect a higher value and quality of property.  
 
-1) Saina
-2) Quentin
-3) Vincent
-4) Kivanc
+<img src="https://www.xbyte.io/images/blog/2021/may/realstate/benefits-of-real-estate-web-scraping.jpg" >  
 
-#### Timeline
+#### Contributors  
 
-28.01 - 02.02 2022
+1) Quentin  
+2) Vincent  
+3) Kivanc  
+4) Saina  
+
+#### Timeline  
+
+28.01 - 02.02 2022  
 
 
