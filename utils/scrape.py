@@ -82,7 +82,7 @@ class ScrapeImmoweb(Thread):
                         else:
                             data_string = data.string
                             if data_string is None:
-                                if clean_head == "Living area":
+                                if clean_head in ["Living area", "Terrace surface", "Surface of the plot", "Garden surface"]:
                                     for span in data("span"):
                                         span.extract()
                                     clean_data = " ".join(data.contents).split()[0]
@@ -100,7 +100,7 @@ class ScrapeImmoweb(Thread):
                             else:
                                 self.dictionary[" ".join(row.th.string.split())] = " ".join(data.string.split())
         self.dictionary["Type of property"] = self.url.split('/')[5]
-        self.dictionary["Neighbourhood or locality"] = self.url.split('/')[7]
+        self.dictionary["Locality"] = self.url.split('/')[7]
 
 
 
