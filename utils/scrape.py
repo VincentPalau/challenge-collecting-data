@@ -4,6 +4,8 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
+from utils.file_operation import saveToCSV
+
 class FetchUrls(Thread):
     '''
     Collect URLs of ads to scrape
@@ -99,6 +101,7 @@ class ScrapeImmoweb(Thread):
                                 self.dictionary[" ".join(row.th.string.split())] = " ".join(data.string.split())
         self.dictionary["Type of property"] = self.url.split('/')[5]
         self.dictionary["Locality"] = self.url.split('/')[7]
+        saveToCSV(self.dictionary,"./utils/properties.csv")
 
 if __name__ == "__main__": # only use for testing
     set_urls = fetch_urls(3)
