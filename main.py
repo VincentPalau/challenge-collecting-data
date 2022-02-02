@@ -20,9 +20,3 @@ def launchScrape():
     print("Scraping is done.")
 
 launchScrape()
-        
-    
-    
-
-
-
