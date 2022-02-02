@@ -35,7 +35,8 @@ def saveToCSV(property: dict, path: str) -> str:
         The function that will save the property paramater to path paramater as a csv file. It will call the cleanDirectory().
         And then it will write the paramater to csv file as a row.
         :param property: The dictionary that has a property attributes what user wants to save.
-        :param path: The string that user wants to save 
+        :param path: The string that user wants to save
+        :return report_message: The string that provide to situation of function as string message. 
         """
         report_message = ""
         cols = ["Locality", "Price", "Bedrooms", "Living area", "Kitchen type", "Furnished", "Terrace surface", "Garden surface", "Surface of the plot", "Number of frontages", "Swimming pool", "Building condition","Type of property"]
@@ -59,6 +60,11 @@ def saveToCSV(property: dict, path: str) -> str:
         return report_message
 
 def cleanDictionary(property: dict) -> dict:
+    """
+    The function that will clean and change some attributes that has not value or the value is boolean.
+    :params property: The dictionary that wants to clean.
+    :return clean dict: The dictionary that already cleaned version from input paramater.
+    """
     try:
         cols = ["Locality", "Price", "Bedrooms", "Living area", "Kitchen type", "Furnished", "Terrace surface", "Garden surface", "Surface of the plot", "Number of frontages", "Swimming pool", "Building condition"]
         clean_dict = property
