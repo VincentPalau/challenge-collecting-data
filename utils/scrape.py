@@ -56,7 +56,7 @@ class ScrapeImmoweb(Thread):
     dictionary : the dictionary to store all the information
 
     '''
-    keywords_list = ["Neighbourhood or locality", "Price", "Bedrooms", "Living area", "Kitchen type", "Furnished", "Terrace surface", "Garden surface", "Surface of the plot", "Number of frontages", "Swimming pool", "Building condition"]
+    keywords_list = ["Price", "Bedrooms", "Living area", "Kitchen type", "Furnished", "Terrace surface", "Garden surface", "Surface of the plot", "Number of frontages", "Swimming pool", "Building condition"]
     def __init__(self, url: str, dictionary: dict) -> None:
         Thread.__init__(self)
         self.url = url
@@ -99,7 +99,9 @@ class ScrapeImmoweb(Thread):
                                      self.dictionary[clean_head] = None
                             else:
                                 self.dictionary[" ".join(row.th.string.split())] = " ".join(data.string.split())
-        self.dictionary["type"] = self.url.split('/')[5]
+        self.dictionary["Type of property"] = self.url.split('/')[5]
+        self.dictionary["Neighbourhood or locality"] = self.url.split('/')[7]
+
 
 
 if __name__ == "__main__": # only use for testing
