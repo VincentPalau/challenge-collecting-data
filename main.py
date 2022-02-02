@@ -3,7 +3,7 @@ Main program follow to work flow.
 
 """
 
-from utils.file_operation import createCSV
+from utils.file_operation import createCSV, DictToCSV
 from utils.scrape import ScrapeImmoweb, fetch_urls
 
 
@@ -17,6 +17,9 @@ def launchScrape():
         properties = {}
         ad = ScrapeImmoweb(url,properties)
         ad.scraping_ads()
+        DictToCSV(properties).run("./utils/properties.csv")
+
     print("Scraping is done.")
 
-launchScrape()
+if __name__  == "__main__":
+    launchScrape()
