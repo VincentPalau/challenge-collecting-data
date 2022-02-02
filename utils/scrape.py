@@ -54,14 +54,12 @@ class ScrapeImmoweb(Thread):
     keywords_list : a list of the information to scrape from the ad
     url : the URL of the ad
     dictionary : the dictionary to store all the information
-
     '''
     keywords_list = ["Price", "Bedrooms", "Living area", "Kitchen type", "Furnished", "Terrace surface", "Garden surface", "Surface of the plot", "Number of frontages", "Swimming pool", "Building condition"]
     def __init__(self, url: str, dictionary: dict) -> None:
         Thread.__init__(self)
         self.url = url
         self.dictionary = dictionary
-        self.dictionary["url"] = url
 
     def scraping_ads(self) -> None:
         '''
@@ -101,8 +99,6 @@ class ScrapeImmoweb(Thread):
                                 self.dictionary[" ".join(row.th.string.split())] = " ".join(data.string.split())
         self.dictionary["Type of property"] = self.url.split('/')[5]
         self.dictionary["Locality"] = self.url.split('/')[7]
-
-
 
 if __name__ == "__main__": # only use for testing
     set_urls = fetch_urls(3)
