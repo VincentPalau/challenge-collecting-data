@@ -101,7 +101,6 @@ class ScrapeImmoweb(Thread):
                                 self.dictionary[" ".join(row.th.string.split())] = " ".join(data.string.split())
         self.dictionary["Type of property"] = self.url.split('/')[5]
         self.dictionary["Locality"] = self.url.split('/')[7]
-        saveToCSV(self.dictionary,"./utils/properties.csv")
 
 if __name__ == "__main__": # only use for testing
     set_urls = fetch_urls(3)
