@@ -36,6 +36,6 @@ This project enables company Immo Eliza to collect real-time data from immoweb w
 
 #### Timeline  
 
-28.01 - 02.02 2022  
+28.01.2022 - 02.02 2022  
 
 
